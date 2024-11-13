@@ -1,0 +1,151 @@
+.book-list-container {
+  padding: 1rem;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    margin: 0;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 2rem;
+
+    .search-bar {
+      width: 300px;
+      height: 42px;
+
+      input {
+        height: 42px;
+        color: black;
+      }
+    }
+  }
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 42px !important;
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper:not(:focus-within) {
+    border: 1px solid black;
+    border-radius: 4px !important;
+
+    .mdc-notched-outline__notch {
+      display: flex;
+
+      mat-label {
+        color: darkgrey;
+      }
+    }
+
+    .mdc-floating-label--float-above {
+      mat-label {
+        color: transparent;
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  padding-top: 5rem;
+}
+
+.book-item {
+  position: relative;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .details,
+  .actions {
+    padding: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .details {
+    color: #97b0f5;
+    text-align: center;
+    margin-top: 0.5rem;
+    transform: translateY(-20px);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    button:nth-child(1) {
+      mat-icon {
+        color: #4caf50;
+      }
+
+      &:hover {
+        background-color: #576557;
+      }
+    }
+
+    button:nth-child(2) {
+      mat-icon {
+        color: #ef5d5d;
+      }
+      &:hover {
+        background-color: #dcb5b3;
+      }
+    }
+  }
+
+  &:hover .details,
+  &:hover .actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

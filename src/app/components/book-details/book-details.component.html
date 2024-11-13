@@ -1,0 +1,41 @@
+<ng-container *ngIf="!isEditBook; else bookForm">
+  <div class="book-detail-container">
+    <div class="book-detail">
+      <div class="book-detail__cover">
+        <img [src]="book.coverImage" alt="Book cover of {{ book.title }}" />
+      </div>
+
+      <div class="book-detail__info">
+        <div class="book-detail__header">
+          <div class="book-detail__title">
+            {{ book.title }} ({{ book.year }})
+          </div>
+        </div>
+
+        <div class="book-detail__description">
+          {{ book.description }}
+        </div>
+        <div class="book-detail__author">Author: {{ book.author }}</div>
+
+        <div class="book-detail__footer">
+          <button color="primary" mat-flat-button (click)="openBookDetails()">
+            Edit
+          </button>
+          <button color="warn" mat-flat-button (click)="deleteBook(book.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="book-detail__close">
+        <button mat-icon-button mat-dialog-close>
+          <mat-icon color="primary">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #bookForm>
+  <app-book-form></app-book-form>
+</ng-template>

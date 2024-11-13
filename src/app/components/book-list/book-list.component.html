@@ -1,0 +1,59 @@
+<div class="book-list-container">
+  <header class="header">
+    <h1>Books</h1>
+    <div class="header-controls">
+      <mat-form-field appearance="outline" class="search-bar">
+        <mat-label>Find a book</mat-label>
+        <input
+          matInput
+          (input)="onSearch($event)"
+          placeholder="Name or Author"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="openAddBookForm()">
+        Add book
+      </button>
+    </div>
+  </header>
+
+  <ng-container *ngIf="books.length && filteredBooks.length; else zeroScreen">
+    <div class="book-list">
+      <div
+        *ngFor="let book of filteredBooks"
+        class="book-item"
+        [ngStyle]="{ 'background-image': 'url(' + book.coverImage + ')' }"
+      >
+        <div class="overlay" (click)="openDetails(book)">
+          <div class="details">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }} ( {{ book.year }} )</p>
+          </div>
+          <div class="actions">
+            <button
+              mat-icon-button
+              (click)="editBook(book); $event.stopPropagation()"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="deleteBook(book.id); $event.stopPropagation()"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #zeroScreen>
+    <app-zero-screen
+      [text]="
+        !books.length
+          ? 'Sorry, there are no books available.'
+          : 'No books found'
+      "
+    ></app-zero-screen>
+  </ng-template>
+</div>
